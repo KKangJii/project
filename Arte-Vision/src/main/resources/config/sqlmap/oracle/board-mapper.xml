@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.bit.board.dao.BoardDAO">
+
+	<resultMap type="boardVO" id="MapBoardVO">
+		<result column="view_cnt" property="viewCnt" />
+		<result column="reg_date" property="regDate" />
+	</resultMap>
+
+	<sql id="selectAll">
+		select no,title,writer,view_cnt,to_char(reg_date,
+		'yyyy-mm-dd') as reg_date
+		from t_board
+	</sql>
+
+	<select id="selectAllboard" resultMap="MapBoardVO"
+		parameterType="hashMap">
+
+		select no, title, writer, to_char(reg_date, 'yyyy-mm-dd') reg_date
+		from ( select rownum rnum, b.*
+		from ( select a.*
+		from t_board a
+		order by no desc ) b
+		<if test="title != null or content != null or writer != null">
+		<where>
+			title like '%${title}%' or writer like '%${writer}%' or content like '%${content}%'
+		</where>
+		</if>
+		)              
+		<![CDATA[
+			where rnum >= (#{pageNo} -1) * 10 + 1      
+			and rnum <= #{pageNo} * 10
+					   
+		]]>
+
+
+	</select>
+	<select id="selectCount" resultType="java.lang.Integer" parameterType="hashMap">
+		select count(*) cnt from t_board
+		<if test="title != null or content != null or writer != null">
+		<where>
+
+			<choose>
+				<when test="title != null and content != null">
+					title like '%${title}%' or content like '%${content}%'
+				</when>
+				<when test="title != null">
+					title like '%${title}%'
+				</when>
+				<when test="writer != null">
+					writer like '%${writer}%'
+				</when>
+				<when test="content != null">
+					content like '%${content}%'
+				</when>
+			</choose>
+
+		</where>
+		</if>
+	</select>
+
+	<select id="selectOneboard" resultMap="MapBoardVO"
+		parameterType="int">
+		select
+		no,title,writer,content,view_cnt,to_char(reg_date, 'yyyy-mm-dd') as
+		reg_date
+		from t_board
+		where no = #{no}
+	</select>
+
+	<insert id="insertBoard" parameterType="boardVO">
+		insert into
+		t_board(no,title,writer,content)
+		values
+		(#{no}+1,#{title},#{writer},#{content})
+	</insert>
+
+	<update id="updateBoard" parameterType="boardVO">
+		update t_board
+		set
+		title=#{title},writer=#{writer},content=#{content}
+		where no > #{no}
+	</update>
+
+	<delete id="deleteBoard" parameterType="int">
+		delete from t_board where
+		no = #{no}
+	</delete>
+	<update id="updateBoardNo" parameterType="int">
+		update t_board
+		set
+		no= no -1
+		where no > #{no}
+	</update>
+</mapper>

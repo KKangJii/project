@@ -1,0 +1,127 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,700);
+@import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
+figure.snip13841 {
+  font-family: 'Raleway', Arial, sans-serif;
+  position: relative;
+  float: left;
+  overflow: hidden;
+  margin: 10px 1%;
+  min-width: 230px;
+  max-width: 315px;
+  width: 100%;
+  color: #ffffff;
+  text-align: left;
+  font-size: 16px;
+  background-color: #000000;
+}
+figure.snip13841 * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+}
+figure.snip13841 img {
+  max-width: 100%;
+  backface-visibility: hidden;
+  vertical-align: top;
+}
+
+figure.snip13841 button {
+  opacity: 0;
+}
+
+
+
+
+figure.snip13841:after,
+figure.snip13841 figcaption {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+ 
+}
+figure.snip13841:after {
+  content: '';
+  background-color: BLACK;
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+  opacity: 0;
+}
+figure.snip13841 figcaption {
+  z-index: 1;
+  padding: 40px;
+}
+figure.snip13841 h3,
+figure.snip13841 .links {
+  width: 100%;
+  margin: 5px 0;
+  padding: 0;
+}
+figure.snip13841 h3 {
+  line-height: 1.1em;
+  font-weight: 700;
+  font-size: 1.4em;
+  text-transform: uppercase;
+  opacity: 0;
+}
+figure.snip13841 p {
+  font-size: 0.8em;
+  font-weight: 300;
+  letter-spacing: 1px;
+  opacity: 0;
+  top: 50%;
+  -webkit-transform: translateY(40px);
+  transform: translateY(40px);
+}
+figure.snip13841 i {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 20px 25px;
+  font-size: 34px;
+  opacity: 0;
+  -webkit-transform: translateX(-10px);
+  transform: translateX(-10px);
+}
+figure.snip13841 a {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+figure.snip13841:hover img,
+figure.snip13841.hover img {
+  zoom: 1;
+  filter: alpha(opacity=10);
+  -webkit-opacity: 0.5;
+  opacity: 0.5;
+}
+figure.snip13841:hover:after,
+figure.snip13841.hover:after {
+  opacity: 0.6;                       /* 마우스 가져 댔을때 투명도 설정!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+}
+figure.snip13841:hover h3,
+figure.snip13841.hover h3,
+figure.snip13841:hover p,
+figure.snip13841.hover p,
+figure.snip13841:hover i,
+figure.snip13841:hover button,
+
+figure.snip13841.hover i {
+  -webkit-transform: translate(0px, 0px);
+  transform: translate(0px, 0px);
+  opacity: 1;
+}
+/* Demo purposes only */
+body {
+  background-color: #212121;
+}

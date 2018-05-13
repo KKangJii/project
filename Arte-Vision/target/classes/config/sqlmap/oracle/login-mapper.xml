@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.bit.login.dao.LoginDAO">
+	<select id="selectSign" parameterType="String" resultType="loginVO">
+	select * from t_member
+	where type = #{type}
+	</select>
+	
+	<select id="selectLogin" parameterType="loginVO" resultType="loginVO">
+		select *
+		from t_member 
+		where id = #{id} and password = #{password}
+	</select>
+	
+	<insert id="insertMember" parameterType="memberVO">
+		insert into t_member(no,id,nickname,password, birthday, tel1, tel2, tel3)
+		values(seq_t_member_no.nextval, #{regId}, #{nickname} , #{regPassword}, #{regBirthday}, #{tel1}, #{tel2}, #{tel3})
+	</insert>
+	<select id="check" parameterType="String" resultType="String">
+		select id
+		from t_member 
+		where id = #{eid}
+	</select>
+	<select id="checkNick" parameterType="String" resultType="String">
+		select nickname
+		from t_member 
+		where nickname = #{nickname}
+	</select>
+	
+	<select id="selectOne" parameterType="String" resultType="loginVO">
+		select *
+		from t_member 
+		where id = #{regId}
+	</select>
+	
+	<select id="pwCheck" parameterType="String" resultType="String">
+		select password
+		from t_member 
+		where id = #{regId}
+	</select>
+	
+	<select id="checkMyInfo" parameterType="loginVO" resultType="loginVO">
+		select id, birthday
+		from t_member 
+		where id = #{id}
+		and birthday = #{regBirthday}
+	</select>
+	<update id="updateInfo" parameterType="loginVO">
+		update t_member
+		set password = #{password}
+		where id = #{id} and birthday = #{regBirthday}
+	</update>
+	
+	<update id="updateInfo2" parameterType="loginVO">
+		update t_member
+		set password = #{regPassword}, nickname = #{nickname} ,birthday= #{regBirthday}, tel1 = #{tel1}, tel2 = #{tel2}, tel3 = #{tel3} 
+		where id = #{regId} and password = #{password}
+	</update>
+	
+	<delete id="withdraw" parameterType="String">
+		delete from t_member
+		where id = #{regId}
+	</delete>
+	
+</mapper>

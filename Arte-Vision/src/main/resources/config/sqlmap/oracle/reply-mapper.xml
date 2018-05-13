@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.bit.reply.dao.ReplyDAO">
+
+	<resultMap type="replyVO" id="MapReplyVO">
+		<result column="reg_date" property="regDate"/>
+	</resultMap>
+	<sql id="selectAllr">
+		select no,content,writer,to_char(reg_date, 'yyyy-mm-dd') as reg_date
+		from t_reply
+	</sql>
+	 <select id="selectCount" parameterType="int" resultType="java.lang.Integer">
+		select count(*) cnt from t_reply
+		where rno = #{reNum}
+	</select>
+	<select id="selectAllreply" parameterType="hashMap" resultMap="MapReplyVO">
+		select no, writer,content, to_char(reg_date, 'yyyy-mm-dd') reg_date
+		from ( select rownum rnum, b.*
+		from ( select a.*
+		from t_reply a
+		order by no desc ) b)              
+		<![CDATA[
+			where rnum >= (#{pageNo} -1) * 10 + 1      
+			and rnum <= #{pageNo} * 10
+			and rno = #{rno}
+					   
+		]]>
+	</select>
+	
+	<insert id="insertReply" parameterType="replyVO">
+		insert into t_reply(no,rno,content,writer)
+		values(seq_t_reply_no.nextval,#{rno},#{content},#{writer})
+	</insert>
+	
+	<update id="updateReply" parameterType="replyVO">
+		update t_reply
+		set content=#{content}
+		where no = #{no}
+	</update>
+	
+	<delete id="deleteReply" parameterType="int">
+		delete from t_reply where no = #{no}
+	</delete>
+	
+	<delete id="deleteReply2" parameterType="int">
+		delete from t_reply where rno = #{no}
+	</delete>
+</mapper>

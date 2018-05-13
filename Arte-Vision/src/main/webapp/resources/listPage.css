@@ -1,0 +1,77 @@
+@CHARSET "UTF-8";
+
+.dkdk-in{
+	-webkit-animation:tossUp;
+	-webkit-animation-duration: 1500ms;
+}
+
+.ButtonHide{
+	hide(500);
+}
+.ButtonShow{
+	show(500);
+}
+
+
+
+
+@-webkit-keyframes tossUp{
+	0%{
+		-webkit-transform:  scale(0.5)  translateX(-200%);
+		
+		opacity:1;		
+		z-index:-1;
+	}
+	
+	50%{
+		-webkit-transform:  scale(0.5)  translateX(-200%);
+		opacity:1;
+		z-index:-1;						
+	}
+	
+	90%{
+		-webkit-transform: scale(0.5) translateX(0%);
+		opacity:1;
+		z-index:-1;		
+	}
+	
+		
+	100%{
+		-webkit-transform:scale(1) translateX(0%);
+		z-index:-1;
+		
+	}
+}
+.dkdk-out{
+	-webkit-animation:pOut;
+	-webkit-animation-duration: 1500ms;
+	
+}
+
+@-webkit-keyframes pOut{
+	0%{
+		-webkit-transform:  scale(1)  translateX(0%);
+		
+		opacity:1;		
+		z-index:-1;
+	}
+	
+	50%{
+		-webkit-transform:  scale(0.5)  translateX(0%);
+		opacity:1;
+		z-index:-1;						
+	}
+	
+	90%{
+		-webkit-transform: scale(0.5) translateX(-200%);
+		opacity:1;
+		z-index:-1;		
+	}
+	
+		
+	100%{
+		-webkit-transform:scale(0.5) translateX(-200%);
+		z-index:-1;
+		
+	}
+}
