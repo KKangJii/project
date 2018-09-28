@@ -60,7 +60,7 @@ public class MailController {
         
         if(login != null) {
         	service.updateInfo(loginVO);
-        	if(mailService.send(subject, sb.toString(), "blackcat123590@gmail.com", email1, null)) {
+        	if(mailService.send(subject, sb.toString(), "아이디", email1, null)) {
         		str = "귀하의 이메일 주소로 새로운 임시 비밀번호를 발송 하였습니다.";
         		return str;
         	}        	
